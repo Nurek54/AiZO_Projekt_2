@@ -1,8 +1,11 @@
 #include "BellmanFord.h"
 #include <iostream>
 #include <limits>
+#include <chrono>
 
 void BellmanFord::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     size_t liczbaKrawedzi = graf.pobierzLiczbeKrawedzi();
 
@@ -34,6 +37,10 @@ void BellmanFord::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
         }
     }
 
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Bellmana-Forda (Lista Sąsiedztwa): " << duration.count() << " mikrosekund" << std::endl;
+
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         std::cout << "Odleglosc od " << start << " do " << i << " wynosi " << odleglosc[i] << std::endl;
     }
@@ -43,6 +50,8 @@ void BellmanFord::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
 }
 
 void BellmanFord::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     size_t liczbaKrawedzi = graf.pobierzLiczbeKrawedzi();
 
@@ -74,6 +83,10 @@ void BellmanFord::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start) {
             }
         }
     }
+
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Bellmana-Forda (Macierz Incydencji): " << duration.count() << " mikrosekund" << std::endl;
 
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         std::cout << "Odleglosc od " << start << " do " << i << " wynosi " << odleglosc[i] << std::endl;

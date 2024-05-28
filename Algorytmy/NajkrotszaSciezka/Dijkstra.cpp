@@ -1,8 +1,11 @@
 #include "Dijkstra.h"
 #include <iostream>
 #include <limits>
+#include <chrono>
 
 void Dijkstra::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     int* odleglosc = new int[liczbaWierzcholkow];
     bool* odwiedzone = new bool[liczbaWierzcholkow];
@@ -37,6 +40,10 @@ void Dijkstra::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
         }
     }
 
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Dijkstry (Lista Sąsiedztwa): " << duration.count() << " mikrosekund" << std::endl;
+
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         std::cout << "Odleglosc od " << start << " do " << i << " wynosi " << odleglosc[i] << std::endl;
     }
@@ -46,6 +53,8 @@ void Dijkstra::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
 }
 
 void Dijkstra::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     int* odleglosc = new int[liczbaWierzcholkow];
     bool* odwiedzone = new bool[liczbaWierzcholkow];
@@ -77,6 +86,10 @@ void Dijkstra::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start) {
             }
         }
     }
+
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Dijkstry (Macierz Incydencji): " << duration.count() << " mikrosekund" << std::endl;
 
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         std::cout << "Odleglosc od " << start << " do " << i << " wynosi " << odleglosc[i] << std::endl;

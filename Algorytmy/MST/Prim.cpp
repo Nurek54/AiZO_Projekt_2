@@ -1,8 +1,11 @@
 #include "Prim.h"
 #include <iostream>
 #include <limits>
+#include <chrono>
 
 void Prim::uruchomDlaListy(const ListaSasiedztwa& graf) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
 
     int* klucz = new int[liczbaWierzcholkow];
@@ -40,6 +43,10 @@ void Prim::uruchomDlaListy(const ListaSasiedztwa& graf) {
         }
     }
 
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Prima (Lista Sąsiedztwa): " << duration.count() << " mikrosekund" << std::endl;
+
     for (size_t i = 1; i < liczbaWierzcholkow; ++i) {
         std::cout << rodzic[i] << " - " << i << std::endl;
     }
@@ -50,6 +57,8 @@ void Prim::uruchomDlaListy(const ListaSasiedztwa& graf) {
 }
 
 void Prim::uruchomDlaMacierzy(const MacierzIncydencji& graf) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
 
     int* klucz = new int[liczbaWierzcholkow];
@@ -84,6 +93,10 @@ void Prim::uruchomDlaMacierzy(const MacierzIncydencji& graf) {
             }
         }
     }
+
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Prima (Macierz Incydencji): " << duration.count() << " mikrosekund" << std::endl;
 
     for (size_t i = 1; i < liczbaWierzcholkow; ++i) {
         std::cout << rodzic[i] << " - " << i << std::endl;

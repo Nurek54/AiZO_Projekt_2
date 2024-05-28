@@ -1,8 +1,11 @@
 #include "Kruskal.h"
 #include <iostream>
 #include <algorithm>
+#include <chrono>
 
 void Kruskal::uruchomDlaListy(const ListaSasiedztwa& graf) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     size_t liczbaKrawedzi = graf.pobierzLiczbeKrawedzi();
 
@@ -51,6 +54,10 @@ void Kruskal::uruchomDlaListy(const ListaSasiedztwa& graf) {
         }
     }
 
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Kruskala (Lista Sąsiedztwa): " << duration.count() << " mikrosekund" << std::endl;
+
     std::cout << "Minimalne Drzewo Rozpinające (Lista Sąsiedztwa):" << std::endl;
     for (size_t i = 0; i < wynikIndeks; ++i) {
         std::cout << "Krawędź: " << wynikBufor[3 * i] << " - " << wynikBufor[3 * i + 1] << " Waga: " << wynikBufor[3 * i + 2] << std::endl;
@@ -62,6 +69,8 @@ void Kruskal::uruchomDlaListy(const ListaSasiedztwa& graf) {
 }
 
 void Kruskal::uruchomDlaMacierzy(const MacierzIncydencji& graf) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     size_t liczbaKrawedzi = graf.pobierzLiczbeKrawedzi();
 
@@ -110,6 +119,10 @@ void Kruskal::uruchomDlaMacierzy(const MacierzIncydencji& graf) {
             wynikIndeks++;
         }
     }
+
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Kruskala (Macierz Incydencji): " << duration.count() << " mikrosekund" << std::endl;
 
     std::cout << "Minimalne Drzewo Rozpinające (Macierz Incydencji):" << std::endl;
     for (size_t i = 0; i < wynikIndeks; ++i) {

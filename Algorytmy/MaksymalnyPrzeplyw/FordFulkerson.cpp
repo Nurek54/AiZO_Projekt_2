@@ -2,7 +2,7 @@
 #include <iostream>
 #include <limits>
 #include <queue>
-#include <vector>
+#include <chrono>
 
 bool bfs(int** rGraph, int liczbaWierzcholkow, int start, int koniec, int parent[]) {
     bool* visited = new bool[liczbaWierzcholkow];
@@ -38,6 +38,8 @@ bool bfs(int** rGraph, int liczbaWierzcholkow, int start, int koniec, int parent
 }
 
 int FordFulkerson::uruchomDlaListy(const ListaSasiedztwa& graf, int start, int koniec) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     int** rGraph = new int*[liczbaWierzcholkow];
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
@@ -74,6 +76,10 @@ int FordFulkerson::uruchomDlaListy(const ListaSasiedztwa& graf, int start, int k
         maxFlow += pathFlow;
     }
 
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Forda-Fulkersona (Lista Sąsiedztwa): " << duration.count() << " mikrosekund" << std::endl;
+
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         delete[] rGraph[i];
     }
@@ -84,6 +90,8 @@ int FordFulkerson::uruchomDlaListy(const ListaSasiedztwa& graf, int start, int k
 }
 
 int FordFulkerson::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start, int koniec) {
+    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     int** rGraph = new int*[liczbaWierzcholkow];
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
@@ -120,6 +128,10 @@ int FordFulkerson::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start, 
 
         maxFlow += pathFlow;
     }
+
+    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
+    std::cout << "Czas działania algorytmu Forda-Fulkersona (Macierz Incydencji): " << duration.count() << " mikrosekund" << std::endl;
 
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         delete[] rGraph[i];

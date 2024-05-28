@@ -27,9 +27,6 @@ C:\Users\g_sie\CLionProjects\AiZO_Projekt_2\
 │   ├── MacierzIncydencji.h
 │   ├── ListaSasiedztwa.cpp
 │   ├── ListaSasiedztwa.h
-├── Wyniki
-│   ├── plots
-│   ├── generate.py
 ├── Utils
 │   ├── GeneratorGrafow.cpp
 │   ├── GeneratorGrafow.h

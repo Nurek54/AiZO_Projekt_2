@@ -3,7 +3,8 @@ project(AiZO_Projekt_2)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(AiZO_Projekt_2 main.cpp
+add_executable(
+        AiZO_Projekt_2 main.cpp
         Menu/Menu.cpp
         Menu/Menu.h
         Menu/Menu.h
@@ -31,4 +32,5 @@ add_executable(AiZO_Projekt_2 main.cpp
         Algorytmy/NajkrotszaSciezka/BellmanFord.h
         Algorytmy/MaksymalnyPrzeplyw/FordFulkerson.cpp
         Algorytmy/MaksymalnyPrzeplyw/FordFulkerson.h
-        Tablica/KrawedzSciezki.cpp)
+        Tablica/KrawedzSciezki.cpp
+        )
