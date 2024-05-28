@@ -1,0 +1,3 @@
+C:/Users/g_sie/CLionProjects/AiZO_Projekt_2/cmake-build-debug/CMakeFiles/AiZO_Projekt_2.dir
+C:/Users/g_sie/CLionProjects/AiZO_Projekt_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/g_sie/CLionProjects/AiZO_Projekt_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
