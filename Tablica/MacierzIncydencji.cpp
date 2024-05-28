@@ -3,55 +3,50 @@
 MacierzIncydencji::MacierzIncydencji(size_t liczbaKrawedzi, size_t liczbaWierzcholkow, size_t* dane)
         : liczbaKrawedzi(liczbaKrawedzi), liczbaWierzcholkow(liczbaWierzcholkow) {
     wartosciKrawedzi = new size_t[liczbaKrawedzi];
-    macierzHandler = new KomorkaMacierzy* [liczbaWierzcholkow];
-
-    for (size_t i = 0; i < liczbaWierzcholkow; i++) {
+    macierzHandler = new KomorkaMacierzy*[liczbaWierzcholkow];
+    for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         macierzHandler[i] = new KomorkaMacierzy[liczbaKrawedzi];
-        for (size_t j = 0; j < liczbaKrawedzi; j++) {
+        for (size_t j = 0; j < liczbaKrawedzi; ++j) {
             macierzHandler[i][j] = KomorkaMacierzy::Brak;
         }
     }
 
-    int indeksDanych = 0;
-    int indeksWartosci = 0;
-    for (size_t i = 0; i < liczbaKrawedzi; i++) {
-        auto wartosc = dane[indeksDanych];
-        macierzHandler[dane[indeksDanych]][i] = KomorkaMacierzy::Poczatek;
-        indeksDanych++;
-        macierzHandler[dane[indeksDanych]][i] = KomorkaMacierzy::Koniec;
-        indeksDanych++;
-        wartosciKrawedzi[indeksWartosci] = dane[indeksDanych];
-        indeksDanych++;
-        indeksWartosci++;
+    size_t indeks = 0;
+    for (size_t i = 0; i < liczbaKrawedzi; ++i) {
+        size_t poczatek = dane[indeks++];
+        size_t koniec = dane[indeks++];
+        size_t wartosc = dane[indeks++];
+        macierzHandler[poczatek][i] = KomorkaMacierzy::Poczatek;
+        macierzHandler[koniec][i] = KomorkaMacierzy::Koniec;
+        wartosciKrawedzi[i] = wartosc;
     }
 }
 
 MacierzIncydencji::~MacierzIncydencji() {
-    if (macierzHandler != nullptr) {
-        for (size_t i = 0; i < liczbaWierzcholkow; i++) {
-            delete[] macierzHandler[i];
-        }
-        delete[] macierzHandler;
+    for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
+        delete[] macierzHandler[i];
     }
+    delete[] macierzHandler;
+    delete[] wartosciKrawedzi;
 }
 
 void MacierzIncydencji::drukuj(std::ostream& wyjscie) const {
     wyjscie << "    ";
-    for (size_t i = 0; i < liczbaKrawedzi; i++) {
+    for (size_t i = 0; i < liczbaKrawedzi; ++i) {
         wyjscie << std::setw(2) << i << "   ";
     }
     wyjscie << std::endl;
 
-    for (size_t i = 0; i < liczbaWierzcholkow; i++) {
+    for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         wyjscie << std::setw(2) << i << "  ";
-        for (size_t j = 0; j < liczbaKrawedzi; j++) {
+        for (size_t j = 0; j < liczbaKrawedzi; ++j) {
             wyjscie << std::setw(2) << static_cast<int>(macierzHandler[i][j]) << " | ";
         }
         wyjscie << std::endl;
     }
 
     wyjscie << " w  ";
-    for (size_t i = 0; i < liczbaKrawedzi; i++) {
+    for (size_t i = 0; i < liczbaKrawedzi; ++i) {
         wyjscie << std::setw(2) << wartosciKrawedzi[i] << " | ";
     }
     wyjscie << std::endl;

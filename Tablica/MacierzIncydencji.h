@@ -20,7 +20,7 @@ public:
     size_t pobierzLiczbeKrawedzi() const;
     KomorkaMacierzy** pobierzMacierz() const;
     size_t* pobierzWartosci() const;
-    int pobierzWage(size_t u, size_t v) const; // Dodana metoda
+    int pobierzWage(size_t u, size_t v) const;
 
 private:
     size_t liczbaKrawedzi;

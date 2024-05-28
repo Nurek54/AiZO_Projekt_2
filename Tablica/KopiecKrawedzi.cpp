@@ -1,40 +1,27 @@
 #include "KopiecKrawedzi.h"
-#include "ListaSasiedztwa.h"
 #include <iostream>
 
-KopiecKrawedzi::KopiecKrawedzi(bool czyscPrzyUsuwaniu) : czyscPrzyUsuwaniu(czyscPrzyUsuwaniu), rozmiar(0), korzen(nullptr) {}
+KopiecKrawedzi::KopiecKrawedzi(bool czyscPrzyUsuwaniu)
+        : czyscPrzyUsuwaniu(czyscPrzyUsuwaniu), rozmiar(0), korzen(nullptr) {}
 
 KopiecKrawedzi::~KopiecKrawedzi() {
-    if (rozmiar == 0) {
-        return;
-    }
-
     if (czyscPrzyUsuwaniu) {
-        for (size_t i = 0; i < rozmiar; i++) {
+        for (size_t i = 0; i < rozmiar; ++i) {
             delete korzen[i];
         }
     }
-
     delete[] korzen;
 }
 
 void KopiecKrawedzi::dodaj(Krawedz* krawedz) {
-    if (rozmiar == 0) {
-        rozmiar++;
-        korzen = new Krawedz * [rozmiar];
-        korzen[0] = krawedz;
-        return;
-    }
-
-    Krawedz** bufor = new Krawedz * [rozmiar + 1];
-    for (size_t i = 0; i < rozmiar; i++) {
+    Krawedz** bufor = new Krawedz*[rozmiar + 1];
+    for (size_t i = 0; i < rozmiar; ++i) {
         bufor[i] = korzen[i];
     }
-
+    bufor[rozmiar] = krawedz;
     delete[] korzen;
     korzen = bufor;
-    korzen[rozmiar] = krawedz;
-    rozmiar++;
+    ++rozmiar;
     naprawWGore();
 }
 
@@ -44,22 +31,12 @@ Krawedz* KopiecKrawedzi::usun() {
     }
 
     Krawedz* krawedzDoZwrotu = korzen[0];
+    korzen[0] = korzen[--rozmiar];
 
-    if (rozmiar == 1) {
-        rozmiar--;
-        delete[] korzen;
-        korzen = nullptr;
-        return krawedzDoZwrotu;
-    }
-
-    korzen[0] = korzen[rozmiar - 1];
-    rozmiar--;
-
-    Krawedz** bufor = new Krawedz * [rozmiar];
-    for (size_t i = 0; i < rozmiar; i++) {
+    Krawedz** bufor = new Krawedz*[rozmiar];
+    for (size_t i = 0; i < rozmiar; ++i) {
         bufor[i] = korzen[i];
     }
-
     delete[] korzen;
     korzen = bufor;
     naprawWDol();
@@ -71,7 +48,7 @@ bool KopiecKrawedzi::jestPusty() const {
 }
 
 void KopiecKrawedzi::drukuj() const {
-    for (size_t i = 0; i < rozmiar; i++) {
+    for (size_t i = 0; i < rozmiar; ++i) {
         std::cout << korzen[i]->poczatek << ' ' << korzen[i]->koniec << ' ' << korzen[i]->wartosc << std::endl;
     }
 }
@@ -79,12 +56,8 @@ void KopiecKrawedzi::drukuj() const {
 void KopiecKrawedzi::naprawWGore() {
     int i = rozmiar - 1;
     int rodzic = (i - 1) / 2;
-    Krawedz* bufor = nullptr;
-
-    while (korzen[rodzic]->wartosc > korzen[i]->wartosc) {
-        bufor = korzen[rodzic];
-        korzen[rodzic] = korzen[i];
-        korzen[i] = bufor;
+    while (i > 0 && korzen[rodzic]->wartosc > korzen[i]->wartosc) {
+        std::swap(korzen[i], korzen[rodzic]);
         i = rodzic;
         rodzic = (i - 1) / 2;
     }
@@ -92,22 +65,15 @@ void KopiecKrawedzi::naprawWGore() {
 
 void KopiecKrawedzi::naprawWDol() {
     int i = 0;
-    int j = 2 * i + 1;
-    Krawedz* bufor = nullptr;
-
-    while (j < rozmiar) {
+    while (2 * i + 1 < rozmiar) {
+        int j = 2 * i + 1;
         if (j + 1 < rozmiar && korzen[j]->wartosc > korzen[j + 1]->wartosc) {
-            j += 1;
+            j++;
         }
-
         if (korzen[i]->wartosc <= korzen[j]->wartosc) {
             break;
         }
-
-        bufor = korzen[i];
-        korzen[i] = korzen[j];
-        korzen[j] = bufor;
+        std::swap(korzen[i], korzen[j]);
         i = j;
-        j = 2 * i + 1;
     }
 }

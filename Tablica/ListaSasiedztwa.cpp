@@ -2,74 +2,51 @@
 
 ListaSasiedztwa::ListaSasiedztwa(size_t liczbaKrawedzi, size_t liczbaWierzcholkow, size_t* dane)
         : liczbaKrawedzi(liczbaKrawedzi), liczbaWierzcholkow(liczbaWierzcholkow) {
-    krawedzie = new Krawedz* [liczbaWierzcholkow];
-
-    for (size_t i = 0; i < liczbaWierzcholkow; i++) {
+    krawedzie = new Krawedz*[liczbaWierzcholkow];
+    for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         krawedzie[i] = nullptr;
     }
 
-    Krawedz* krawedz = nullptr;
     size_t liczbaDanych = 3 * liczbaKrawedzi;
-    size_t obecnyIndeks = 0;
+    for (size_t i = 0; i < liczbaDanych; i += 3) {
+        size_t poczatek = dane[i];
+        size_t koniec = dane[i + 1];
+        size_t wartosc = dane[i + 2];
 
-    while (obecnyIndeks < liczbaDanych) {
-        krawedz = krawedzie[dane[obecnyIndeks]];
-
-        if (krawedz == nullptr) {
-            krawedzie[dane[obecnyIndeks]] = new Krawedz{dane[obecnyIndeks], dane[obecnyIndeks + 1], dane[obecnyIndeks + 2], nullptr, nullptr};
-            obecnyIndeks += 3;
-            continue;
+        Krawedz* nowaKrawedz = new Krawedz{poczatek, koniec, wartosc, nullptr, nullptr};
+        if (krawedzie[poczatek] == nullptr) {
+            krawedzie[poczatek] = nowaKrawedz;
+        } else {
+            Krawedz* tmp = krawedzie[poczatek];
+            while (tmp->nastepna != nullptr) {
+                tmp = tmp->nastepna;
+            }
+            tmp->nastepna = nowaKrawedz;
+            nowaKrawedz->poprzednia = tmp;
         }
-
-        while (krawedz->nastepna != nullptr) {
-            krawedz = krawedz->nastepna;
-        }
-
-        krawedz->nastepna = new Krawedz{dane[obecnyIndeks], dane[obecnyIndeks + 1], dane[obecnyIndeks + 2], nullptr, krawedz};
-        obecnyIndeks += 3;
     }
 }
 
 ListaSasiedztwa::~ListaSasiedztwa() {
-    if (krawedzie != nullptr) {
-        Krawedz* krawedzDoUsuniecia = nullptr;
-
-        for (size_t i = 0; i < liczbaWierzcholkow; i++) {
-            krawedzDoUsuniecia = krawedzie[i];
-
-            if (krawedzDoUsuniecia == nullptr) {
-                continue;
-            }
-
-            while (krawedzDoUsuniecia->nastepna != nullptr) {
-                krawedzDoUsuniecia = krawedzDoUsuniecia->nastepna;
-                delete krawedzDoUsuniecia->poprzednia;
-            }
-            delete krawedzDoUsuniecia;
+    for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
+        Krawedz* krawedz = krawedzie[i];
+        while (krawedz != nullptr) {
+            Krawedz* doUsuniecia = krawedz;
+            krawedz = krawedz->nastepna;
+            delete doUsuniecia;
         }
-
-        delete[] krawedzie;
     }
+    delete[] krawedzie;
 }
 
 void ListaSasiedztwa::drukuj(std::ostream& wyjscie) const {
-    Krawedz* krawedz = nullptr;
-
-    for (size_t i = 0; i < liczbaWierzcholkow; i++) {
+    for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         wyjscie << std::setw(2) << i << " --> ";
-
-        krawedz = krawedzie[i];
-
-        if (krawedz == nullptr) {
-            wyjscie << std::endl;
-            continue;
-        }
-
+        Krawedz* krawedz = krawedzie[i];
         while (krawedz != nullptr) {
             wyjscie << std::setw(2) << krawedz->koniec << '[' << std::setw(2) << krawedz->wartosc << "] | ";
             krawedz = krawedz->nastepna;
         }
-
         wyjscie << std::endl;
     }
 }

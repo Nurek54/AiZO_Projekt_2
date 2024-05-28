@@ -1,7 +1,7 @@
 #ifndef KOPIECKRAWEDZI_H
 #define KOPIECKRAWEDZI_H
 
-#include "ListaSasiedztwa.h"  // Upewnij się, że plik nagłówkowy zawiera definicję klasy Krawedz
+#include "ListaSasiedztwa.h" // Upewnij się, że plik nagłówkowy zawiera definicję klasy Krawedz
 
 class KopiecKrawedzi {
 public:

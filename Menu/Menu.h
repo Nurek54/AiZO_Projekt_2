@@ -29,6 +29,10 @@ private:
 
 public:
     Menu() : macierzIncydencji(nullptr), listaSasiedztwa(nullptr), czytnikGrafow("") {}
+    ~Menu() {
+        delete macierzIncydencji;
+        delete listaSasiedztwa;
+    }
 
     void wyswietlMenuGlowne();
 };
