@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 class KrawedzSciezki {
 public:
     int poczatek;
@@ -13,9 +15,9 @@ public:
     KrawedzSciezki(int p, int k, int w) : poczatek(p), koniec(k), wartosc(w) {}
 
     // Deklaracja operatora <<
-    friend std::ostream& operator<<(std::ostream& wyjscie, const KrawedzSciezki& krawedz);
+    friend ostream& operator<<(ostream& wyjscie, const KrawedzSciezki& krawedz);
 };
 
-std::ostream& operator<<(std::ostream& wyjscie, const KrawedzSciezki& krawedz);
+ostream& operator<<(ostream& wyjscie, const KrawedzSciezki& krawedz);
 
 #endif // KRAWEDZSCIEZKI_H

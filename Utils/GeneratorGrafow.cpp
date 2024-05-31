@@ -1,5 +1,7 @@
 #include "GeneratorGrafow.h"
 
+using namespace std;
+
 SuroweDaneGrafu GeneratorGrafow::generuj(float gestosc, size_t liczbaWierzcholkow, size_t maxWartosc) {
     size_t minimalnaLiczbaKrawedzi = liczbaWierzcholkow;
     size_t liczbaKrawedzi = (gestosc * liczbaWierzcholkow * (liczbaWierzcholkow - 1)) / 2;
@@ -7,10 +9,10 @@ SuroweDaneGrafu GeneratorGrafow::generuj(float gestosc, size_t liczbaWierzcholko
     size_t rozmiarDanych = 3 * liczbaKrawedzi;
     size_t* dane = new size_t[rozmiarDanych];
 
-    std::random_device seed;
-    std::mt19937 gen(seed());
-    std::uniform_int_distribution<size_t> wartosci(1, maxWartosc);
-    std::uniform_int_distribution<size_t> wierzcholki(0, liczbaWierzcholkow - 1);
+    random_device seed;
+    mt19937 gen(seed());
+    uniform_int_distribution<size_t> wartosci(1, maxWartosc);
+    uniform_int_distribution<size_t> wierzcholki(0, liczbaWierzcholkow - 1);
 
     bool** polaczeniaIstnieja = new bool*[liczbaWierzcholkow];
     for (size_t i = 0; i < liczbaWierzcholkow; i++) {

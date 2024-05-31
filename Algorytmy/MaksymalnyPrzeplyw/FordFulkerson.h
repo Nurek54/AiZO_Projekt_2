@@ -4,6 +4,8 @@
 #include "../../Tablica/ListaSasiedztwa.h"
 #include "../../Tablica/MacierzIncydencji.h"
 
+using namespace std;
+
 class FordFulkerson {
 public:
     static int uruchomDlaListy(const ListaSasiedztwa& graf, int start, int koniec);

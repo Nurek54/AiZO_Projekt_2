@@ -1,5 +1,7 @@
 #include "ListaSasiedztwa.h"
 
+using namespace std;
+
 ListaSasiedztwa::ListaSasiedztwa(size_t liczbaKrawedzi, size_t liczbaWierzcholkow, size_t* dane)
         : liczbaKrawedzi(liczbaKrawedzi), liczbaWierzcholkow(liczbaWierzcholkow) {
     krawedzie = new Krawedz*[liczbaWierzcholkow];
@@ -39,15 +41,15 @@ ListaSasiedztwa::~ListaSasiedztwa() {
     delete[] krawedzie;
 }
 
-void ListaSasiedztwa::drukuj(std::ostream& wyjscie) const {
+void ListaSasiedztwa::drukuj(ostream& wyjscie) const {
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
-        wyjscie << std::setw(2) << i << " --> ";
+        wyjscie << setw(2) << i << " --> ";
         Krawedz* krawedz = krawedzie[i];
         while (krawedz != nullptr) {
-            wyjscie << std::setw(2) << krawedz->koniec << '[' << std::setw(2) << krawedz->wartosc << "] | ";
+            wyjscie << setw(2) << krawedz->koniec << '[' << setw(2) << krawedz->wartosc << "] | ";
             krawedz = krawedz->nastepna;
         }
-        wyjscie << std::endl;
+        wyjscie << endl;
     }
 }
 

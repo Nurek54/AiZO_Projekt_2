@@ -3,15 +3,17 @@
 #include <limits>
 #include <chrono>
 
+using namespace std;
+
 void BellmanFord::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
-    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+    auto start_time = chrono::high_resolution_clock::now(); // Start pomiaru czasu
 
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     size_t liczbaKrawedzi = graf.pobierzLiczbeKrawedzi();
 
     int* odleglosc = new int[liczbaWierzcholkow];
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
-        odleglosc[i] = std::numeric_limits<int>::max();
+        odleglosc[i] = numeric_limits<int>::max();
     }
     odleglosc[start] = 0;
 
@@ -31,18 +33,18 @@ void BellmanFord::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
             int u = krawedzie[j].poczatek;
             int v = krawedzie[j].koniec;
             int waga = krawedzie[j].wartosc;
-            if (odleglosc[u] != std::numeric_limits<int>::max() && odleglosc[u] + waga < odleglosc[v]) {
+            if (odleglosc[u] != numeric_limits<int>::max() && odleglosc[u] + waga < odleglosc[v]) {
                 odleglosc[v] = odleglosc[u] + waga;
             }
         }
     }
 
-    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
-    std::cout << "Czas działania algorytmu Bellmana-Forda (Lista Sąsiedztwa): " << duration.count() << " mikrosekund" << std::endl;
+    auto stop_time = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop_time - start_time);
+    cout << "Czas dzialania algorytmu Bellmana-Forda (Lista Sasiedztwa): " << duration.count() << " mikrosekund" << endl;
 
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
-        std::cout << "Odleglosc od " << start << " do " << i << " wynosi " << odleglosc[i] << std::endl;
+        cout << "Odleglosc od " << start << " do " << i << " wynosi " << odleglosc[i] << endl;
     }
 
     delete[] odleglosc;
@@ -50,14 +52,14 @@ void BellmanFord::uruchomDlaListy(const ListaSasiedztwa& graf, int start) {
 }
 
 void BellmanFord::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start) {
-    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+    auto start_time = chrono::high_resolution_clock::now(); // Start pomiaru czasu
 
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     size_t liczbaKrawedzi = graf.pobierzLiczbeKrawedzi();
 
     int* odleglosc = new int[liczbaWierzcholkow];
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
-        odleglosc[i] = std::numeric_limits<int>::max();
+        odleglosc[i] = numeric_limits<int>::max();
     }
     odleglosc[start] = 0;
 
@@ -78,18 +80,18 @@ void BellmanFord::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start) {
             int u = krawedzie[j].poczatek;
             int v = krawedzie[j].koniec;
             int waga = krawedzie[j].wartosc;
-            if (odleglosc[u] != std::numeric_limits<int>::max() && odleglosc[u] + waga < odleglosc[v]) {
+            if (odleglosc[u] != numeric_limits<int>::max() && odleglosc[u] + waga < odleglosc[v]) {
                 odleglosc[v] = odleglosc[u] + waga;
             }
         }
     }
 
-    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
-    std::cout << "Czas działania algorytmu Bellmana-Forda (Macierz Incydencji): " << duration.count() << " mikrosekund" << std::endl;
+    auto stop_time = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop_time - start_time);
+    cout << "Czas dzialania algorytmu Bellmana-Forda (Macierz Incydencji): " << duration.count() << " mikrosekund" << endl;
 
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
-        std::cout << "Odleglosc od " << start << " do " << i << " wynosi " << odleglosc[i] << std::endl;
+        cout << "Odleglosc od " << start << " do " << i << " wynosi " << odleglosc[i] << endl;
     }
 
     delete[] odleglosc;

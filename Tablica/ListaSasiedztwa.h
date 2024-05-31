@@ -4,6 +4,8 @@
 #include <iostream>
 #include <iomanip>
 
+using namespace std;
+
 struct Krawedz {
     size_t poczatek;
     size_t koniec;
@@ -17,7 +19,7 @@ public:
     ListaSasiedztwa(size_t liczbaKrawedzi, size_t liczbaWierzcholkow, size_t* dane);
     ~ListaSasiedztwa();
 
-    void drukuj(std::ostream& wyjscie) const;
+    void drukuj(ostream& wyjscie) const;
     size_t pobierzLiczbeWierzcholkow() const;
     size_t pobierzLiczbeKrawedzi() const;
     Krawedz** pobierzKrawedzie() const;

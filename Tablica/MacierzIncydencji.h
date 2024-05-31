@@ -4,6 +4,8 @@
 #include <iostream>
 #include <iomanip>
 
+using namespace std;
+
 enum class KomorkaMacierzy {
     Brak,
     Poczatek,
@@ -15,7 +17,7 @@ public:
     MacierzIncydencji(size_t liczbaKrawedzi, size_t liczbaWierzcholkow, size_t* dane);
     ~MacierzIncydencji();
 
-    void drukuj(std::ostream& wyjscie) const;
+    void drukuj(ostream& wyjscie) const;
     size_t pobierzLiczbeWierzcholkow() const;
     size_t pobierzLiczbeKrawedzi() const;
     KomorkaMacierzy** pobierzMacierz() const;

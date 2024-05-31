@@ -3,6 +3,8 @@
 
 #include "ListaSasiedztwa.h" // Upewnij się, że plik nagłówkowy zawiera definicję klasy Krawedz
 
+using namespace std;
+
 class KopiecKrawedzi {
 public:
     KopiecKrawedzi(bool czyscPrzyUsuwaniu = true);

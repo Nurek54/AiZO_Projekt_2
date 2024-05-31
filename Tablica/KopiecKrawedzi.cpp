@@ -1,6 +1,8 @@
 #include "KopiecKrawedzi.h"
 #include <iostream>
 
+using namespace std;
+
 KopiecKrawedzi::KopiecKrawedzi(bool czyscPrzyUsuwaniu)
         : czyscPrzyUsuwaniu(czyscPrzyUsuwaniu), rozmiar(0), korzen(nullptr) {}
 
@@ -49,7 +51,7 @@ bool KopiecKrawedzi::jestPusty() const {
 
 void KopiecKrawedzi::drukuj() const {
     for (size_t i = 0; i < rozmiar; ++i) {
-        std::cout << korzen[i]->poczatek << ' ' << korzen[i]->koniec << ' ' << korzen[i]->wartosc << std::endl;
+        cout << korzen[i]->poczatek << ' ' << korzen[i]->koniec << ' ' << korzen[i]->wartosc << endl;
     }
 }
 
@@ -57,7 +59,7 @@ void KopiecKrawedzi::naprawWGore() {
     int i = rozmiar - 1;
     int rodzic = (i - 1) / 2;
     while (i > 0 && korzen[rodzic]->wartosc > korzen[i]->wartosc) {
-        std::swap(korzen[i], korzen[rodzic]);
+        swap(korzen[i], korzen[rodzic]);
         i = rodzic;
         rodzic = (i - 1) / 2;
     }
@@ -73,7 +75,7 @@ void KopiecKrawedzi::naprawWDol() {
         if (korzen[i]->wartosc <= korzen[j]->wartosc) {
             break;
         }
-        std::swap(korzen[i], korzen[j]);
+        swap(korzen[i], korzen[j]);
         i = j;
     }
 }

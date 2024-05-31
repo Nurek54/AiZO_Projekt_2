@@ -5,13 +5,15 @@
 #include "KrawedzSciezki.h"
 #include <iostream>
 
+using namespace std;
+
 class Sciezka {
 public:
     Sciezka();
     Sciezka(const Sciezka& sciezka);
 
     void dodajKrawedz(KrawedzSciezki krawedz);
-    void drukuj(std::ostream& wyjscie) const;
+    void drukuj(ostream& wyjscie) const;
 
 private:
     Tablica<KrawedzSciezki> krawedzie;

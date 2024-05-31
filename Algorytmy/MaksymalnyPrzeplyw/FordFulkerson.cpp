@@ -4,13 +4,15 @@
 #include <queue>
 #include <chrono>
 
+using namespace std;
+
 bool bfs(int** rGraph, int liczbaWierzcholkow, int start, int koniec, int parent[]) {
     bool* visited = new bool[liczbaWierzcholkow];
     for (int i = 0; i < liczbaWierzcholkow; ++i) {
         visited[i] = false;
     }
 
-    std::queue<int> q;
+    queue<int> q;
     q.push(start);
     visited[start] = true;
     parent[start] = -1;
@@ -38,7 +40,7 @@ bool bfs(int** rGraph, int liczbaWierzcholkow, int start, int koniec, int parent
 }
 
 int FordFulkerson::uruchomDlaListy(const ListaSasiedztwa& graf, int start, int koniec) {
-    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+    auto start_time = chrono::high_resolution_clock::now(); // Start pomiaru czasu
 
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     int** rGraph = new int*[liczbaWierzcholkow];
@@ -61,10 +63,10 @@ int FordFulkerson::uruchomDlaListy(const ListaSasiedztwa& graf, int start, int k
     int maxFlow = 0;
 
     while (bfs(rGraph, liczbaWierzcholkow, start, koniec, parent)) {
-        int pathFlow = std::numeric_limits<int>::max();
+        int pathFlow = numeric_limits<int>::max();
         for (int v = koniec; v != start; v = parent[v]) {
             int u = parent[v];
-            pathFlow = std::min(pathFlow, rGraph[u][v]);
+            pathFlow = min(pathFlow, rGraph[u][v]);
         }
 
         for (int v = koniec; v != start; v = parent[v]) {
@@ -76,9 +78,9 @@ int FordFulkerson::uruchomDlaListy(const ListaSasiedztwa& graf, int start, int k
         maxFlow += pathFlow;
     }
 
-    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
-    std::cout << "Czas działania algorytmu Forda-Fulkersona (Lista Sąsiedztwa): " << duration.count() << " mikrosekund" << std::endl;
+    auto stop_time = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop_time - start_time);
+    cout << "Czas dzialania algorytmu Forda-Fulkersona (Lista Sasiedztwa): " << duration.count() << " mikrosekund" << endl;
 
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         delete[] rGraph[i];
@@ -90,7 +92,7 @@ int FordFulkerson::uruchomDlaListy(const ListaSasiedztwa& graf, int start, int k
 }
 
 int FordFulkerson::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start, int koniec) {
-    auto start_time = std::chrono::high_resolution_clock::now(); // Start pomiaru czasu
+    auto start_time = chrono::high_resolution_clock::now(); // Start pomiaru czasu
 
     size_t liczbaWierzcholkow = graf.pobierzLiczbeWierzcholkow();
     int** rGraph = new int*[liczbaWierzcholkow];
@@ -114,10 +116,10 @@ int FordFulkerson::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start, 
     int maxFlow = 0;
 
     while (bfs(rGraph, liczbaWierzcholkow, start, koniec, parent)) {
-        int pathFlow = std::numeric_limits<int>::max();
+        int pathFlow = numeric_limits<int>::max();
         for (int v = koniec; v != start; v = parent[v]) {
             int u = parent[v];
-            pathFlow = std::min(pathFlow, rGraph[u][v]);
+            pathFlow = min(pathFlow, rGraph[u][v]);
         }
 
         for (int v = koniec; v != start; v = parent[v]) {
@@ -129,9 +131,9 @@ int FordFulkerson::uruchomDlaMacierzy(const MacierzIncydencji& graf, int start, 
         maxFlow += pathFlow;
     }
 
-    auto stop_time = std::chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop_time - start_time);
-    std::cout << "Czas działania algorytmu Forda-Fulkersona (Macierz Incydencji): " << duration.count() << " mikrosekund" << std::endl;
+    auto stop_time = chrono::high_resolution_clock::now(); // Koniec pomiaru czasu
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop_time - start_time);
+    cout << "Czas dzialania algorytmu Forda-Fulkersona (Macierz Incydencji): " << duration.count() << " mikrosekund" << endl;
 
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
         delete[] rGraph[i];

@@ -133,6 +133,12 @@ build CMakeFiles/AiZO_Projekt_2.dir/Tablica/KrawedzSciezki.cpp.obj: CXX_COMPILER
   OBJECT_DIR = CMakeFiles\AiZO_Projekt_2.dir
   OBJECT_FILE_DIR = CMakeFiles\AiZO_Projekt_2.dir\Tablica
 
+build CMakeFiles/AiZO_Projekt_2.dir/Menu/GrafManager.cpp.obj: CXX_COMPILER__AiZO_Projekt_2_unscanned_Debug C$:/Users/g_sie/CLionProjects/AiZO_Projekt_2/Menu/GrafManager.cpp || cmake_object_order_depends_target_AiZO_Projekt_2
+  DEP_FILE = CMakeFiles\AiZO_Projekt_2.dir\Menu\GrafManager.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\AiZO_Projekt_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\AiZO_Projekt_2.dir\Menu
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target AiZO_Projekt_2
@@ -141,7 +147,7 @@ build CMakeFiles/AiZO_Projekt_2.dir/Tablica/KrawedzSciezki.cpp.obj: CXX_COMPILER
 #############################################
 # Link the executable AiZO_Projekt_2.exe
 
-build AiZO_Projekt_2.exe: CXX_EXECUTABLE_LINKER__AiZO_Projekt_2_Debug CMakeFiles/AiZO_Projekt_2.dir/main.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Menu/Menu.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/Sciezka.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/KopiecKrawedzi.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/MacierzIncydencji.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/ListaSasiedztwa.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Utils/GeneratorGrafow.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Utils/CzytnikGrafow.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/MST/Prim.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/MST/Kruskal.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/NajkrotszaSciezka/Dijkstra.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/NajkrotszaSciezka/BellmanFord.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/MaksymalnyPrzeplyw/FordFulkerson.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/KrawedzSciezki.cpp.obj
+build AiZO_Projekt_2.exe: CXX_EXECUTABLE_LINKER__AiZO_Projekt_2_Debug CMakeFiles/AiZO_Projekt_2.dir/main.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Menu/Menu.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/Sciezka.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/KopiecKrawedzi.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/MacierzIncydencji.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/ListaSasiedztwa.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Utils/GeneratorGrafow.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Utils/CzytnikGrafow.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/MST/Prim.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/MST/Kruskal.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/NajkrotszaSciezka/Dijkstra.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/NajkrotszaSciezka/BellmanFord.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Algorytmy/MaksymalnyPrzeplyw/FordFulkerson.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Tablica/KrawedzSciezki.cpp.obj CMakeFiles/AiZO_Projekt_2.dir/Menu/GrafManager.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\AiZO_Projekt_2.dir

@@ -1,11 +1,13 @@
 #include "Sciezka.h"
 
+using namespace std;
+
 void Sciezka::dodajKrawedz(KrawedzSciezki krawedz) {
     this->calkowityKoszt += krawedz.wartosc;
     this->krawedzie.dodajNaPoczatek(krawedz);
 }
 
-void Sciezka::drukuj(std::ostream& wyjscie) const {
+void Sciezka::drukuj(ostream& wyjscie) const {
     this->krawedzie.drukuj(wyjscie);
-    wyjscie << "Calkowity koszt: " << this->calkowityKoszt << std::endl;
+    wyjscie << "Calkowity koszt: " << this->calkowityKoszt << endl;
 }

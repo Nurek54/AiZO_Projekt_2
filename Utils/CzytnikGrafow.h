@@ -6,17 +6,19 @@
 #include <string>
 #include <tuple>
 
+using namespace std;
+
 class CzytnikGrafow {
 public:
-    CzytnikGrafow(std::string sciezkaBazowa);
+    CzytnikGrafow(string sciezkaBazowa);
 
-    MacierzIncydencji* wczytajMacierz(std::string nazwaPliku);
-    ListaSasiedztwa* wczytajListe(std::string nazwaPliku);
+    MacierzIncydencji* wczytajMacierz(string nazwaPliku);
+    ListaSasiedztwa* wczytajListe(string nazwaPliku);
 
 private:
-    std::tuple<size_t, size_t, size_t*> wczytajDane(std::string nazwaPliku);
+    tuple<size_t, size_t, size_t*> wczytajDane(string nazwaPliku);
 
-    std::string sciezkaBazowa;
+    string sciezkaBazowa;
 };
 
 #endif // CZYTNIKGRAFOW_H

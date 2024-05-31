@@ -1,5 +1,7 @@
 #include "MacierzIncydencji.h"
 
+using namespace std;
+
 MacierzIncydencji::MacierzIncydencji(size_t liczbaKrawedzi, size_t liczbaWierzcholkow, size_t* dane)
         : liczbaKrawedzi(liczbaKrawedzi), liczbaWierzcholkow(liczbaWierzcholkow) {
     wartosciKrawedzi = new size_t[liczbaKrawedzi];
@@ -30,26 +32,26 @@ MacierzIncydencji::~MacierzIncydencji() {
     delete[] wartosciKrawedzi;
 }
 
-void MacierzIncydencji::drukuj(std::ostream& wyjscie) const {
+void MacierzIncydencji::drukuj(ostream& wyjscie) const {
     wyjscie << "    ";
     for (size_t i = 0; i < liczbaKrawedzi; ++i) {
-        wyjscie << std::setw(2) << i << "   ";
+        wyjscie << setw(2) << i << "   ";
     }
-    wyjscie << std::endl;
+    wyjscie << endl;
 
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
-        wyjscie << std::setw(2) << i << "  ";
+        wyjscie << setw(2) << i << "  ";
         for (size_t j = 0; j < liczbaKrawedzi; ++j) {
-            wyjscie << std::setw(2) << static_cast<int>(macierzHandler[i][j]) << " | ";
+            wyjscie << setw(2) << static_cast<int>(macierzHandler[i][j]) << " | ";
         }
-        wyjscie << std::endl;
+        wyjscie << endl;
     }
 
     wyjscie << " w  ";
     for (size_t i = 0; i < liczbaKrawedzi; ++i) {
-        wyjscie << std::setw(2) << wartosciKrawedzi[i] << " | ";
+        wyjscie << setw(2) << wartosciKrawedzi[i] << " | ";
     }
-    wyjscie << std::endl;
+    wyjscie << endl;
 }
 
 size_t MacierzIncydencji::pobierzLiczbeWierzcholkow() const {

@@ -5,6 +5,8 @@
 #include <cstddef>  // Dodajemy cstddef, aby zdefiniować size_t
 #include <random>
 
+using namespace std;
+
 struct SuroweDaneGrafu {
     size_t* dane;
     size_t liczbaWierzcholkow;

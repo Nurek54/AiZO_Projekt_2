@@ -5,6 +5,8 @@
 #include "../../Tablica/MacierzIncydencji.h"
 #include "../../Tablica/KopiecKrawedzi.h"
 
+using namespace std;
+
 class Kruskal {
 public:
     static void uruchomDlaListy(const ListaSasiedztwa& graf);

@@ -33,4 +33,6 @@ add_executable(
         Algorytmy/MaksymalnyPrzeplyw/FordFulkerson.cpp
         Algorytmy/MaksymalnyPrzeplyw/FordFulkerson.h
         Tablica/KrawedzSciezki.cpp
-        )
+        Menu/GrafManager.cpp
+        Menu/GrafManager.h
+)

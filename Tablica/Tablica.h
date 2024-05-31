@@ -4,6 +4,8 @@
 #include <iostream>
 #include <stdexcept>
 
+using namespace std;
+
 template <typename T>
 class Tablica {
 private:
@@ -23,7 +25,7 @@ public:
     bool usunZKonca();
     bool usunZPozycji(const size_t& indeks);
 
-    void drukuj(std::ostream& wyjscie) const;
+    void drukuj(ostream& wyjscie) const;
 
     T getPoczatek() const;
     T getKoniec() const;
@@ -189,20 +191,20 @@ bool Tablica<T>::usunZPozycji(const size_t& indeks) {
 }
 
 template <typename T>
-void Tablica<T>::drukuj(std::ostream& wyjscie) const {
+void Tablica<T>::drukuj(ostream& wyjscie) const {
     if (this->rozmiar > 0 && this->glowa != nullptr) {
         for (size_t i = 0; i < this->rozmiar; i++) {
-            wyjscie << i << "> " << this->glowa[i] << std::endl;
+            wyjscie << i << "> " << this->glowa[i] << endl;
         }
         return;
     }
-    wyjscie << "Struktura danych jest pusta" << std::endl;
+    wyjscie << "Struktura danych jest pusta" << endl;
 }
 
 template <typename T>
 T Tablica<T>::getPoczatek() const {
     if (this->rozmiar == 0) {
-        throw std::runtime_error("Rozmiar jest 0");
+        throw runtime_error("Rozmiar jest 0");
     }
 
     return this->glowa[0];
@@ -211,7 +213,7 @@ T Tablica<T>::getPoczatek() const {
 template <typename T>
 T Tablica<T>::getKoniec() const {
     if (this->rozmiar == 0) {
-        throw std::runtime_error("Rozmiar jest 0");
+        throw runtime_error("Rozmiar jest 0");
     }
 
     return this->glowa[this->rozmiar - 1];
@@ -220,7 +222,7 @@ T Tablica<T>::getKoniec() const {
 template <typename T>
 T Tablica<T>::getNaPozycji(const size_t& indeks) const {
     if (indeks >= this->rozmiar) {
-        throw std::runtime_error("Indeks poza zakresem");
+        throw runtime_error("Indeks poza zakresem");
     }
 
     return this->glowa[indeks];
@@ -233,6 +235,6 @@ size_t Tablica<T>::getRozmiar() const {
 
 // Przeciążenie operatora << dla klasy KrawedzSciezki
 class KrawedzSciezki;
-std::ostream& operator<<(std::ostream& wyjscie, const KrawedzSciezki& krawedz);
+ostream& operator<<(ostream& wyjscie, const KrawedzSciezki& krawedz);
 
 #endif // TABLICA_H

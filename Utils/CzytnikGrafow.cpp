@@ -1,13 +1,15 @@
 #include "CzytnikGrafow.h"
 #include <fstream>
 
-CzytnikGrafow::CzytnikGrafow(std::string sciezkaBazowa) : sciezkaBazowa(sciezkaBazowa) {}
+using namespace std;
 
-MacierzIncydencji* CzytnikGrafow::wczytajMacierz(std::string nazwaPliku) {
+CzytnikGrafow::CzytnikGrafow(string sciezkaBazowa) : sciezkaBazowa(sciezkaBazowa) {}
+
+MacierzIncydencji* CzytnikGrafow::wczytajMacierz(string nazwaPliku) {
     size_t liczbaKrawedzi, liczbaWierzcholkow;
     size_t* dane;
 
-    std::tie(liczbaKrawedzi, liczbaWierzcholkow, dane) = this->wczytajDane(nazwaPliku);
+    tie(liczbaKrawedzi, liczbaWierzcholkow, dane) = this->wczytajDane(nazwaPliku);
 
     if (dane == nullptr) {
         return nullptr;
@@ -20,11 +22,11 @@ MacierzIncydencji* CzytnikGrafow::wczytajMacierz(std::string nazwaPliku) {
     return macierz;
 }
 
-ListaSasiedztwa* CzytnikGrafow::wczytajListe(std::string nazwaPliku) {
+ListaSasiedztwa* CzytnikGrafow::wczytajListe(string nazwaPliku) {
     size_t liczbaKrawedzi, liczbaWierzcholkow;
     size_t* dane;
 
-    std::tie(liczbaKrawedzi, liczbaWierzcholkow, dane) = this->wczytajDane(nazwaPliku);
+    tie(liczbaKrawedzi, liczbaWierzcholkow, dane) = this->wczytajDane(nazwaPliku);
 
     if (dane == nullptr) {
         return nullptr;
@@ -37,11 +39,11 @@ ListaSasiedztwa* CzytnikGrafow::wczytajListe(std::string nazwaPliku) {
     return lista;
 }
 
-std::tuple<size_t, size_t, size_t*> CzytnikGrafow::wczytajDane(std::string nazwaPliku) {
-    std::ifstream plik(this->sciezkaBazowa + nazwaPliku);
+tuple<size_t, size_t, size_t*> CzytnikGrafow::wczytajDane(string nazwaPliku) {
+    ifstream plik(this->sciezkaBazowa + nazwaPliku);
 
     if (plik.fail()) {
-        return std::make_tuple(-1, -1, nullptr);
+        return make_tuple(-1, -1, nullptr);
     }
 
     size_t liczbaKrawedzi, liczbaWierzcholkow;
@@ -55,5 +57,5 @@ std::tuple<size_t, size_t, size_t*> CzytnikGrafow::wczytajDane(std::string nazwa
         plik >> dane[i];
     }
 
-    return std::make_tuple(liczbaKrawedzi, liczbaWierzcholkow, dane);
+    return make_tuple(liczbaKrawedzi, liczbaWierzcholkow, dane);
 }
