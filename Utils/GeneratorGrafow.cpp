@@ -1,18 +1,17 @@
 #include "GeneratorGrafow.h"
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 SuroweDaneGrafu GeneratorGrafow::generuj(float gestosc, size_t liczbaWierzcholkow, size_t maxWartosc) {
+    srand(static_cast<unsigned int>(time(nullptr))); // Inicjalizacja generatora liczb losowych
+
     size_t minimalnaLiczbaKrawedzi = liczbaWierzcholkow;
-    size_t liczbaKrawedzi = (gestosc * liczbaWierzcholkow * (liczbaWierzcholkow - 1)) / 2;
+    size_t liczbaKrawedzi = static_cast<size_t>((gestosc * liczbaWierzcholkow * (liczbaWierzcholkow - 1)) / 2);
     liczbaKrawedzi = liczbaKrawedzi > minimalnaLiczbaKrawedzi ? liczbaKrawedzi : minimalnaLiczbaKrawedzi;
     size_t rozmiarDanych = 3 * liczbaKrawedzi;
     size_t* dane = new size_t[rozmiarDanych];
-
-    random_device seed;
-    mt19937 gen(seed());
-    uniform_int_distribution<size_t> wartosci(1, maxWartosc);
-    uniform_int_distribution<size_t> wierzcholki(0, liczbaWierzcholkow - 1);
 
     bool** polaczeniaIstnieja = new bool*[liczbaWierzcholkow];
     for (size_t i = 0; i < liczbaWierzcholkow; i++) {
@@ -22,29 +21,29 @@ SuroweDaneGrafu GeneratorGrafow::generuj(float gestosc, size_t liczbaWierzcholko
     for (size_t i = 0; i < minimalnaLiczbaKrawedzi - 1; i++) {
         dane[3 * i] = i;
         dane[3 * i + 1] = i + 1;
-        dane[3 * i + 2] = wartosci(gen);
+        dane[3 * i + 2] = rand() % maxWartosc + 1;
         polaczeniaIstnieja[i][i + 1] = true;
         polaczeniaIstnieja[i + 1][i] = true;
     }
 
     dane[3 * (minimalnaLiczbaKrawedzi - 1)] = minimalnaLiczbaKrawedzi - 1;
     dane[3 * (minimalnaLiczbaKrawedzi - 1) + 1] = 0;
-    dane[3 * (minimalnaLiczbaKrawedzi - 1) + 2] = wartosci(gen);
+    dane[3 * (minimalnaLiczbaKrawedzi - 1) + 2] = rand() % maxWartosc + 1;
     polaczeniaIstnieja[minimalnaLiczbaKrawedzi - 1][0] = true;
     polaczeniaIstnieja[0][minimalnaLiczbaKrawedzi - 1] = true;
 
     for (size_t i = minimalnaLiczbaKrawedzi; i < liczbaKrawedzi; i++) {
-        size_t poczatek = wierzcholki(gen);
-        size_t koniec = wierzcholki(gen);
+        size_t poczatek = rand() % liczbaWierzcholkow;
+        size_t koniec = rand() % liczbaWierzcholkow;
 
         while (poczatek == koniec || polaczeniaIstnieja[poczatek][koniec]) {
-            poczatek = wierzcholki(gen);
-            koniec = wierzcholki(gen);
+            poczatek = rand() % liczbaWierzcholkow;
+            koniec = rand() % liczbaWierzcholkow;
         }
 
         dane[3 * i] = poczatek;
         dane[3 * i + 1] = koniec;
-        dane[3 * i + 2] = wartosci(gen);
+        dane[3 * i + 2] = rand() % maxWartosc + 1;
 
         polaczeniaIstnieja[poczatek][koniec] = true;
         polaczeniaIstnieja[koniec][poczatek] = true;

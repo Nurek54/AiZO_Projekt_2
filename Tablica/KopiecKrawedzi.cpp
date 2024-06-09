@@ -59,7 +59,9 @@ void KopiecKrawedzi::naprawWGore() {
     int i = rozmiar - 1;
     int rodzic = (i - 1) / 2;
     while (i > 0 && korzen[rodzic]->wartosc > korzen[i]->wartosc) {
-        swap(korzen[i], korzen[rodzic]);
+        Krawedz* temp = korzen[i];
+        korzen[i] = korzen[rodzic];
+        korzen[rodzic] = temp;
         i = rodzic;
         rodzic = (i - 1) / 2;
     }
@@ -75,7 +77,9 @@ void KopiecKrawedzi::naprawWDol() {
         if (korzen[i]->wartosc <= korzen[j]->wartosc) {
             break;
         }
-        swap(korzen[i], korzen[j]);
+        Krawedz* temp = korzen[i];
+        korzen[i] = korzen[j];
+        korzen[j] = temp;
         i = j;
     }
 }

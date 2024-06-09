@@ -4,7 +4,6 @@
 #include "../Tablica/MacierzIncydencji.h"
 #include "../Tablica/ListaSasiedztwa.h"
 #include <string>
-#include <tuple>
 
 using namespace std;
 
@@ -16,7 +15,7 @@ public:
     ListaSasiedztwa* wczytajListe(string nazwaPliku);
 
 private:
-    tuple<size_t, size_t, size_t*> wczytajDane(string nazwaPliku);
+    bool wczytajDane(string nazwaPliku, size_t& liczbaKrawedzi, size_t& liczbaWierzcholkow, size_t*& dane);
 
     string sciezkaBazowa;
 };

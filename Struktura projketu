@@ -14,6 +14,8 @@ C:\Users\g_sie\CLionProjects\AiZO_Projekt_2\
 │   │   ├── FordFulkerson.cpp
 │   │   ├── FordFulkerson.h
 ├── Menu
+│   ├── GrafManager.cpp
+│   ├── GrafManager.h
 │   ├── Menu.cpp
 │   ├── Menu.h
 ├── Tablica

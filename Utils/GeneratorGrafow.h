@@ -1,9 +1,7 @@
 #ifndef GENERATOR_GRAFOW_H
 #define GENERATOR_GRAFOW_H
 
-#include <tuple>
-#include <cstddef>  // Dodajemy cstddef, aby zdefiniować size_t
-#include <random>
+#include <cstddef>
 
 using namespace std;
 

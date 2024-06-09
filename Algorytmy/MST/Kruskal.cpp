@@ -1,9 +1,23 @@
 #include "Kruskal.h"
 #include <iostream>
-#include <algorithm>
 #include <chrono>
 
 using namespace std;
+
+void Kruskal::selectionSort(Krawedz* krawedzie, size_t liczbaKrawedzi) {
+    for (size_t i = 0; i < liczbaKrawedzi - 1; ++i) {
+        size_t minIdx = i;
+        for (size_t j = i + 1; j < liczbaKrawedzi; ++j) {
+            if (krawedzie[j].wartosc < krawedzie[minIdx].wartosc) {
+                minIdx = j;
+            }
+        }
+        // Zamiana miejscami
+        Krawedz temp = krawedzie[i];
+        krawedzie[i] = krawedzie[minIdx];
+        krawedzie[minIdx] = temp;
+    }
+}
 
 void Kruskal::uruchomDlaListy(const ListaSasiedztwa& graf) {
     auto start_time = chrono::high_resolution_clock::now(); // Start pomiaru czasu
@@ -22,9 +36,8 @@ void Kruskal::uruchomDlaListy(const ListaSasiedztwa& graf) {
         }
     }
 
-    sort(krawedzie, krawedzie + liczbaKrawedzi, [](const Krawedz& a, const Krawedz& b) {
-        return a.wartosc < b.wartosc;
-    });
+    // Sortowanie krawędzi za pomocą sortowania przez wybór
+    selectionSort(krawedzie, liczbaKrawedzi);
 
     size_t* identyfikatoryDrzew = new size_t[liczbaWierzcholkow];
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {
@@ -88,9 +101,8 @@ void Kruskal::uruchomDlaMacierzy(const MacierzIncydencji& graf) {
         }
     }
 
-    sort(krawedzie, krawedzie + liczbaKrawedzi, [](const Krawedz& a, const Krawedz& b) {
-        return a.wartosc < b.wartosc;
-    });
+    // Sortowanie krawędzi za pomocą sortowania przez wybór
+    selectionSort(krawedzie, liczbaKrawedzi);
 
     size_t* identyfikatoryDrzew = new size_t[liczbaWierzcholkow];
     for (size_t i = 0; i < liczbaWierzcholkow; ++i) {

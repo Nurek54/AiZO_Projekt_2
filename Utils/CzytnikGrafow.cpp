@@ -9,9 +9,7 @@ MacierzIncydencji* CzytnikGrafow::wczytajMacierz(string nazwaPliku) {
     size_t liczbaKrawedzi, liczbaWierzcholkow;
     size_t* dane;
 
-    tie(liczbaKrawedzi, liczbaWierzcholkow, dane) = this->wczytajDane(nazwaPliku);
-
-    if (dane == nullptr) {
+    if (!this->wczytajDane(nazwaPliku, liczbaKrawedzi, liczbaWierzcholkow, dane)) {
         return nullptr;
     }
 
@@ -26,9 +24,7 @@ ListaSasiedztwa* CzytnikGrafow::wczytajListe(string nazwaPliku) {
     size_t liczbaKrawedzi, liczbaWierzcholkow;
     size_t* dane;
 
-    tie(liczbaKrawedzi, liczbaWierzcholkow, dane) = this->wczytajDane(nazwaPliku);
-
-    if (dane == nullptr) {
+    if (!this->wczytajDane(nazwaPliku, liczbaKrawedzi, liczbaWierzcholkow, dane)) {
         return nullptr;
     }
 
@@ -39,23 +35,21 @@ ListaSasiedztwa* CzytnikGrafow::wczytajListe(string nazwaPliku) {
     return lista;
 }
 
-tuple<size_t, size_t, size_t*> CzytnikGrafow::wczytajDane(string nazwaPliku) {
+bool CzytnikGrafow::wczytajDane(string nazwaPliku, size_t& liczbaKrawedzi, size_t& liczbaWierzcholkow, size_t*& dane) {
     ifstream plik(this->sciezkaBazowa + nazwaPliku);
 
     if (plik.fail()) {
-        return make_tuple(-1, -1, nullptr);
+        return false;
     }
-
-    size_t liczbaKrawedzi, liczbaWierzcholkow;
 
     plik >> liczbaKrawedzi >> liczbaWierzcholkow;
 
     size_t rozmiarDanych = liczbaKrawedzi * 3;
-    size_t* dane = new size_t[rozmiarDanych];
+    dane = new size_t[rozmiarDanych];
 
     for (size_t i = 0; i < rozmiarDanych; i++) {
         plik >> dane[i];
     }
 
-    return make_tuple(liczbaKrawedzi, liczbaWierzcholkow, dane);
+    return true;
 }
